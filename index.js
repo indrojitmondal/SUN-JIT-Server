@@ -16,7 +16,7 @@ app.use(express.json());
 //const uri = "mongodb+srv://<db_username>:<db_password>@cluster0.kk0ds.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.kk0ds.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
-console.log(process.env.DB_USER, process.env.DB_PASS);
+// console.log(process.env.DB_USER, process.env.DB_PASS);
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -30,16 +30,29 @@ async function run() {
     // await client.connect();
     // Send a ping to confirm a successful connection
    // await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    
+   console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    const reviewsCollections = client.db('reviewsDB').collection('reviews');
+    
+    app.post('/reviews', async(req, res)=>{
+
+      const newReviews= req.body;
+      // const newOrders = req.body;
+        console.log(newReviews);
+        const result = await reviewsCollections.insertOne(newReviews);
+        res.send(result);
+  
+    })
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+    //await client.close();
   }
 }
 run().catch(console.dir);
 app.get('/', (req, res)=>{
-    res.send('Server is running....');
+    res.send('Server is running good....');
 })
+
 app.listen(port, ()=>{
-    console.log(`This server is running on port: ${port}`);
+    console.log(`This server is running good on port: ${port}`);
 })
