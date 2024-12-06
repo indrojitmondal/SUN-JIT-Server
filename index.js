@@ -75,7 +75,13 @@ async function run() {
     const result = await reviewsCollections.updateOne(filter, review, options);
     res.send(result);
 
- })
+  })
+  app.delete('/reviews/:id', async(req, res)=>{
+    const id = req.params.id;
+    const query = {_id: new ObjectId(id)};
+    const result = await reviewsCollections.deleteOne(query);
+    res.send(result); 
+   })
     
   } finally {
     // Ensures that the client will close when you finish/error
