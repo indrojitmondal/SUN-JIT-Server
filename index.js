@@ -41,6 +41,7 @@ async function run() {
         console.log(newReviews);
         const result = await reviewsCollections.insertOne(newReviews);
         res.send(result);
+
   
     })
     app.get('/reviews', async(req, res)=>{
@@ -59,17 +60,17 @@ async function run() {
     const id = req.params.id;
     const filter = {_id: new ObjectId(id)}
     const options={ upsert: true};
-    const updatedUser = req.body;
-    console.log(updatedUser);
+    const updatedReviews = req.body;
+    //console.log(updatedReviews);
     //game_url, game_title, game_description, rating, publication_year, genres, email
     const review={
       $set:{
-        game_url: updatedUser.game_url,
-        game_title: updatedUser.game_title,
-        game_description: updatedUser.game_description,
-        rating: updatedUser.rating,
-        publication_year: updatedUser.publication_year,
-        genres: updatedUser.genres
+        game_url: updatedReviews.game_url,
+        game_title: updatedReviews.game_title,
+        game_description: updatedReviews.game_description,
+        rating: updatedReviews.rating,
+        publication_year: updatedReviews.publication_year,
+        genres: updatedReviews.genres
        }
     }
     const result = await reviewsCollections.updateOne(filter, review, options);
