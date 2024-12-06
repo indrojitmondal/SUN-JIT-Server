@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -48,6 +48,14 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     })
+    
+  app.get('/reviews/:id', async(req, res)=>{
+    const id = req.params.id;
+    const query = {_id: new ObjectId(id)};
+    const result = await reviewsCollections.findOne(query);
+    res.send(result);
+  })
+    
   } finally {
     // Ensures that the client will close when you finish/error
     //await client.close();
@@ -59,5 +67,5 @@ app.get('/', (req, res)=>{
 })
 
 app.listen(port, ()=>{
-    console.log(`This server is running good on port: ${port}`);
+    console.log(`This server is running well on port: ${port}`);
 })
