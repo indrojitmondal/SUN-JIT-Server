@@ -62,7 +62,7 @@ async function run() {
     const updatedUser = req.body;
     console.log(updatedUser);
     //game_url, game_title, game_description, rating, publication_year, genres, email
-    const user={
+    const review={
       $set:{
         game_url: updatedUser.game_url,
         game_title: updatedUser.game_title,
@@ -72,7 +72,7 @@ async function run() {
         genres: updatedUser.genres
        }
     }
-    const result = await reviewsCollections.updateOne(filter, user, options);
+    const result = await reviewsCollections.updateOne(filter, review, options);
     res.send(result);
 
  })
