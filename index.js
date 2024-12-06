@@ -55,6 +55,27 @@ async function run() {
     const result = await reviewsCollections.findOne(query);
     res.send(result);
   })
+  app.put('/reviews/:id', async(req, res)=>{
+    const id = req.params.id;
+    const filter = {_id: new ObjectId(id)}
+    const options={ upsert: true};
+    const updatedUser = req.body;
+    console.log(updatedUser);
+    //game_url, game_title, game_description, rating, publication_year, genres, email
+    const user={
+      $set:{
+        game_url: updatedUser.game_url,
+        game_title: updatedUser.game_title,
+        game_description: updatedUser.game_description,
+        rating: updatedUser.rating,
+        publication_year: updatedUser.publication_year,
+        genres: updatedUser.genres
+       }
+    }
+    const result = await reviewsCollections.updateOne(filter, user, options);
+    res.send(result);
+
+ })
     
   } finally {
     // Ensures that the client will close when you finish/error
