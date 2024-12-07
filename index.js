@@ -51,6 +51,11 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     })
+    app.get('/reviewsWithLimit', async(req, res)=>{
+      const cursor = reviewsCollections.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
     
   app.get('/reviews/:id', async(req, res)=>{
     const id = req.params.id;
