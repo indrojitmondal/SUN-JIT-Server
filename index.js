@@ -51,7 +51,7 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     })
-    app.get('/reviewsWithLimit', async(req, res)=>{
+    app.get('/highRatedGames', async(req, res)=>{
       const cursor = reviewsCollections.find();
       const result = await cursor.toArray();
       res.send(result);
