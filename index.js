@@ -52,11 +52,22 @@ async function run() {
       res.send(result);
     })
     app.get('/highRatedGames', async(req, res)=>{
-      const cursor = reviewsCollections.find();
-      console.log(cursor);
-      const result = await cursor.toArray();
-      //console.log(result);
-      res.send(result);
+      
+      try{
+        // query to filter data with 'rating' >=3 
+        
+    
+       const query ={
+         $expr: { $gte: [{ $toInt: "$rating" }, 3] }
+       };
+        const result = await reviewsCollections.find(query).limit(6).toArray(); 
+        //const result = await reviewsCollections.find().toArray(); 
+        res.send(result);
+      }
+      catch(error){
+        console.log('Error fetching high-rated games:', error);
+        res.status(500).send({message:'Internal Server Error'});
+      }
     })
     
   app.get('/reviews/:id', async(req, res)=>{
