@@ -102,6 +102,7 @@ async function run() {
 
 
   })
+ 
   app.get('/myWatchList', async(req, res)=>{
     const cursor = watchListCollections.find();
     const result = await cursor.toArray();
@@ -110,7 +111,7 @@ async function run() {
    
     
   } finally {
-    // Ensures that the client will close when you finish/error
+    // Ensures that the client will close when you finish/error.
     //await client.close();
   }
 }
