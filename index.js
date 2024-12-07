@@ -33,6 +33,7 @@ async function run() {
     
    console.log("Pinged your deployment. You successfully connected to MongoDB!");
     const reviewsCollections = client.db('reviewsDB').collection('reviews');
+    const watchListCollections = client.db('reviewsDB').collection('watchList');
     
     app.post('/reviews', async(req, res)=>{
 
@@ -40,6 +41,16 @@ async function run() {
       // const newOrders = req.body;
         console.log(newReviews);
         const result = await reviewsCollections.insertOne(newReviews);
+        res.send(result);
+
+  
+    })
+    app.post('/myWatchList', async(req, res)=>{
+
+      const newReviews= req.body;
+      // const newOrders = req.body;
+        console.log(newReviews);
+        const result = await watchListCollections.insertOne(newReviews);
         res.send(result);
 
   
