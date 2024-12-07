@@ -45,16 +45,7 @@ async function run() {
 
   
     })
-    app.post('/myWatchList', async(req, res)=>{
-
-      const newReviews= req.body;
-      // const newOrders = req.body;
-        console.log(newReviews);
-        const result = await watchListCollections.insertOne(newReviews);
-        res.send(result);
-
-  
-    })
+    
     app.get('/reviews', async(req, res)=>{
       const cursor = reviewsCollections.find();
       const result = await cursor.toArray();
@@ -94,6 +85,22 @@ async function run() {
     const result = await reviewsCollections.deleteOne(query);
     res.send(result); 
    })
+   app.post('/myWatchList', async(req, res)=>{
+
+    const newReviews= req.body;
+    // const newOrders = req.body;
+      console.log(newReviews);
+      const result = await watchListCollections.insertOne(newReviews);
+      res.send(result);
+
+
+  })
+  app.get('/myWatchList', async(req, res)=>{
+    const cursor = watchListCollections.find();
+    const result = await cursor.toArray();
+    res.send(result);
+  })
+   
     
   } finally {
     // Ensures that the client will close when you finish/error
