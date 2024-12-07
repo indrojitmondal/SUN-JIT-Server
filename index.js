@@ -58,7 +58,7 @@ async function run() {
         
     
        const query ={
-         $expr: { $gte: [{ $toInt: "$rating" }, 3] }
+         $expr: { $gte: [{ $toInt: "$rating" }, 4] }
        };
         const result = await reviewsCollections.find(query).limit(6).toArray(); 
         //const result = await reviewsCollections.find().toArray(); 
