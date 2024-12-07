@@ -15,8 +15,11 @@ SUN@JIT is a game review application by which users can explore and share game r
 <a href='https://sunjit-98781.web.app/' target='_blank'>Visit Site </a> 
  ### API EndPoints
 https://sunjit-server.vercel.app/
+
 https://sunjit-server.vercel.app/reviews
+
 https://sunjit-server.vercel.app/highRatedGames
+
 https://sunjit-server.vercel.app/myWatchList
 
 
