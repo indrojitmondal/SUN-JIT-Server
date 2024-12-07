@@ -53,7 +53,9 @@ async function run() {
     })
     app.get('/highRatedGames', async(req, res)=>{
       const cursor = reviewsCollections.find();
+      console.log(cursor);
       const result = await cursor.toArray();
+      //console.log(result);
       res.send(result);
     })
     
